@@ -29,70 +29,18 @@ class MainActivityTest2 {
 
     @Rule
     @JvmField
-    var mActivityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
+    var activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
 
     @Test
-    fun mainActivityTest2() {
-        val recyclerView = onView(
-            allOf(
-                withId(R.id.recyclerView),
-                childAtPosition(
-                    withClassName(`is`("androidx.constraintlayout.widget.ConstraintLayout")),
-                    0
-                )
-            )
-        )
-        recyclerView.perform(actionOnItemAtPosition<ViewHolder>(1, click()))
+    fun actionBar_menuItemClick_returnMsg(){
+        //Recomendado para menús de opciones
+        onView(withId(R.id.recyclerView))
+            .perform(click())
 
-        val materialCheckBox = onView(
-            allOf(
-                withId(R.id.cbFavorite),
-                childAtPosition(
-                    childAtPosition(
-                        withClassName(`is`("com.google.android.material.card.MaterialCardView")),
-                        0
-                    ),
-                    3
-                ),
-                isDisplayed()
-            )
-        )
-        materialCheckBox.perform(click())
+        onView(withId(R.id.action_history))
+            .perform(click())
 
-        val checkBox = onView(
-            allOf(
-                withId(R.id.cbFavorite),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-        checkBox.check(matches(isDisplayed()))
-
-        val checkBox2 = onView(
-            allOf(
-                withId(R.id.cbFavorite),
-                withParent(withParent(IsInstanceOf.instanceOf(androidx.cardview.widget.CardView::class.java))),
-                isDisplayed()
-            )
-        )
-        checkBox2.check(matches(isDisplayed()))
-    }
-
-    private fun childAtPosition(
-        parentMatcher: Matcher<View>, position: Int
-    ): Matcher<View> {
-
-        return object : TypeSafeMatcher<View>() {
-            override fun describeTo(description: Description) {
-                description.appendText("Child at position $position in parent ")
-                parentMatcher.describeTo(description)
-            }
-
-            public override fun matchesSafely(view: View): Boolean {
-                val parent = view.parent
-                return parent is ViewGroup && parentMatcher.matches(parent)
-                        && view == parent.getChildAt(position)
-            }
-        }
+        onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(matches(withText("Ir al historial…")))
     }
 }
