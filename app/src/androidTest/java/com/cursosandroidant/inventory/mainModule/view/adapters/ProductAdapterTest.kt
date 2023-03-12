@@ -1,5 +1,6 @@
 package com.cursosandroidant.inventory.mainModule.view.adapters
 
+import android.view.View
 import androidx.test.espresso.Espresso.onView
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -11,12 +12,14 @@ import org.junit.runner.RunWith
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.test.espresso.PerformException
+import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.contrib.RecyclerViewActions.actionOnItem
-import androidx.test.espresso.contrib.RecyclerViewActions.scrollTo
+import androidx.test.espresso.contrib.RecyclerViewActions.*
 import androidx.test.espresso.matcher.ViewMatchers.*
 import com.cursosandroidant.inventory.R
+import com.cursosandroidant.inventory.clickChildViewWithId
+import org.hamcrest.Matcher
 import org.hamcrest.Matchers.*
 import org.junit.Assert.fail
 
@@ -77,6 +80,15 @@ class ProductAdapterTest {
         }
     }
 
-    
+    @Test
+    fun cbFavorite_click_changeState(){
+        onView(withId(R.id.recyclerView))
+            .perform(actionOnItemAtPosition<ProductAdapter.ViewHolder>(
+                1, clickChildViewWithId(R.id.cbFavorite)
+            ))
+        Thread.sleep(2_000)
+    }
+
+
 
 }

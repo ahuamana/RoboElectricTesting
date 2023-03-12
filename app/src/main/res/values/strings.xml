@@ -18,4 +18,8 @@
     <string name="item_product_score">%.2f</string>
 
     <string name="main_msg_welcome">Bienvenido…</string>
+    <string name="action_exit">Salir</string>
+    <string name="main_msg_go_history">Ir al Historial</string>
+    <string name="main_msg_go_exit">Salir</string>
+    <string name="main_msg_not_found">Accion no encontrada</string>
 </resources>
